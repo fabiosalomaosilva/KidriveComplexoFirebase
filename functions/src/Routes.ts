@@ -1,4 +1,7 @@
 import { Router, Request, Response } from "express";
+
+import SetorRep from "./Repository/SetorRep";
+import { Setor } from "./models/Setor";
 import AccountController from "./controllers/AccountController";
 import Autorize from './middlewares/AutorizeMiddleware';
 
@@ -12,6 +15,14 @@ router.get("/pacientes", Autorize, (req: Request, res: Response) => {
 
 router.get("/acompanhantes",  (req: Request, res: Response) => {
   res.send("Get Acompanhantes deu certo");
+});
+
+router.get("/seed", async (req, res) => {
+  const setor: Setor = {
+    nome: "Complexo Regulador Estadual",
+  };
+  const obj = await SetorRep.inserir(setor);
+  return res.json(obj);
 });
 
 export default router;

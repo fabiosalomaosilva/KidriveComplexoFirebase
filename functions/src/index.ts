@@ -1,9 +1,8 @@
 import * as functions from "firebase-functions";
 import express from "express";
 
-import './configs/FirebaseConfig';
+import "./configs/FirebaseConfig";
 import routes from "./Routes";
-
 
 const app = express();
 
