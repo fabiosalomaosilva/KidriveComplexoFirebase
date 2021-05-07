@@ -34,7 +34,7 @@ class AccountController {
         });
       }      
     } catch (erro) {
-      res.send(erro);
+      res.sendStatus(400).send(erro);
     }
   }
 }
