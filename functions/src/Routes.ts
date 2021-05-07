@@ -19,9 +19,9 @@ router.get("/acompanhantes",  (req: Request, res: Response) => {
 
 router.get("/seed", async (req, res) => {
   const setor: Setor = {
-    nome: "Complexo Regulador Estadual",
+    nome: "Diretoria de Regulação",
   };
-  const obj = await SetorRep.inserir(setor);
+  const obj = await SetorRep.inserir(setor, req);
   return res.json(obj);
 });
 
