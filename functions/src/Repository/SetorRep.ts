@@ -8,7 +8,6 @@ class SetorRep {
   async inserir(obj: Setor, req: Request) {
     const db = firebase.firestore();
     try {
-      req.nome = "fabio@arquivarnet.com.br";
       const id = Guid.create().toString();
       obj.criadoEm = firebase.firestore.Timestamp.fromDate(new Date());
       obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
