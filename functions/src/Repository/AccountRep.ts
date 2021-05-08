@@ -54,7 +54,8 @@ class AccountRep {
         return "E-mail de redefinição foi enviada para sua caixa de entrada";
       } catch (error) {
         throw error;
-      }  }
+      } 
+    }
 
 }
 
