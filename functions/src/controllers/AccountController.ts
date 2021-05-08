@@ -1,42 +1,37 @@
 import { Request, Response } from "express";
-import firebase from "firebase";
-import admin from "firebase-admin";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { UserRegister } from "../models/UserRegister";
+import AccountRep from "../Repository/AccountRep";
 
 class AccountController {
   async Auth(req: Request, res: Response) {
     const { email, password } = req.body;
     try {
-      const userCredential = await firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password);
-      const userEmail = userCredential.user?.email;
-      if (userEmail != null) {
-        const user = await admin.auth().getUserByEmail(userEmail);
-        const secret = process.env.JWT_KEY;
-        const token = jwt.sign(
-          {
-            nomeCompleto: user.displayName,
-            email: user.email,
-            id: user.uid,
-          },
-          secret as string,
-          { expiresIn: '1h' }
-        );
-        res.json({
-          nomeCompleto: user.displayName,
-          email: user.email,
-          id: user.uid,
-          token: token
-        });
-      }      
-    } catch (erro) {
-      res.sendStatus(400).send(erro);
+      const data = await AccountRep.login(email, password);
+      if (data == null)
+        res.status(401).send("Usuário ou senha inseridos errados");
+      return data;
+    } catch (error) {
+      return res.status(401).send(error);
     }
   }
+
+  async CreateUser(req: Request, res: Response) {
+    const user:UserRegister = {
+      nomeCompleto: req.body.nomeCompleto,
+      cpf: req.body.cpf,
+      email: req.body.email,
+      foto: req.body?.foto,
+      setor: req.body?.setor,
+      setorId: req.body?.setorId,
+      permissoes: []
+    }
+    try {
+      return res.json(await AccountRep.createUser(user));
+    } catch (error) {
+      return res.status(401).send(error);
+    }
+  }
+
 }
 
 export default new AccountController();
