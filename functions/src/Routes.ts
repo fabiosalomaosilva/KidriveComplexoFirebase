@@ -16,7 +16,7 @@ const router = Router();
 
 router.post("/auth", AccountController.Auth);
 router.post("/createuser", AccountController.CreateUser);
-//router.post("/forgotuser", AccountController.);
+router.post("/forgotuser", AccountController.forgotPassword);
 
 router.get("/pacientes", Autorize, PacientesController.getAll);
 router.get("/pacientes/:id", Autorize, PacientesController.get);
