@@ -56,7 +56,6 @@ class AccountRep {
         throw error;
       } 
     }
-
 }
 
 export default new AccountRep();

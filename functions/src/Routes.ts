@@ -8,19 +8,33 @@ import { Pessoa, TipoPessoa } from "./models/Pessoa";
 import { Telefone, TipoTelefone } from "./models/Telefone";
 import PessoaRep from "./Repository/PessoaRep";
 import AccountRep from "./Repository/AccountRep";
+import PacientesController from "./controllers/PacientesController";
+import AcompanhantesController from "./controllers/AcompanhantesController";
+import SetoresController from "./controllers/SetoresController";
 
 const router = Router();
 
 router.post("/auth", AccountController.Auth);
 router.post("/createuser", AccountController.CreateUser);
+//router.post("/forgotuser", AccountController.);
 
-router.get("/pacientes", Autorize, (req: Request, res: Response) => {
-  res.send(req.userId);
-});
+router.get("/pacientes", Autorize, PacientesController.getAll);
+router.get("/pacientes/:id", Autorize, PacientesController.get);
+router.post("/pacientes/", Autorize, PacientesController.post);
+router.put("/pacientes/", Autorize, PacientesController.put);
+router.delete("/pacientes/", Autorize, PacientesController.delete);
 
-router.get("/acompanhantes", (req: Request, res: Response) => {
-  res.send("Get Acompanhantes deu certo");
-});
+router.get("/acompanhantes", Autorize, AcompanhantesController.getAll);
+router.get("/acompanhantes/:id", Autorize, AcompanhantesController.get);
+router.post("/acompanhantes/", Autorize, AcompanhantesController.post);
+router.put("/acompanhantes/", Autorize, AcompanhantesController.put);
+router.delete("/acompanhantes/", Autorize, AcompanhantesController.delete);
+
+router.get("/setores", Autorize, SetoresController.getAll);
+router.get("/setores/:id", Autorize, SetoresController.get);
+router.post("/setores/", Autorize, SetoresController.post);
+router.put("/setores/", Autorize, SetoresController.put);
+router.delete("/setores/", Autorize, SetoresController.delete);
 
 router.get("/setores/:id", async (req: Request, res: Response) => {
   try {
