@@ -32,6 +32,14 @@ class AccountController {
     }
   }
 
+  async forgotPassword(req: Request, res: Response) {
+    const email = req.body.email;
+    try {
+      return res.send(await AccountRep.forgotPassword(email));
+    } catch (error) {
+      return res.status(401).send(error);
+    }
+  }
 }
 
 export default new AccountController();
