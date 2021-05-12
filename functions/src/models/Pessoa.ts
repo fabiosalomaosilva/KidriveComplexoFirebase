@@ -1,3 +1,4 @@
+import { Documento } from "./Documento";
 import { TipoEndereco } from "./Endereco";
 import { Telefone } from "./Telefone";
 
@@ -11,6 +12,7 @@ export interface Pessoa {
 
   telefones: Telefone[];
   enderecos: TipoEndereco[];
+  documentos: Documento[];
   
   criadoPor?: string;
   criadoEm?: any;
