@@ -16,17 +16,18 @@ class AccountController {
    }
 
    async CreateUser(req: Request, res: Response) {
-      const user: UserRegister = {
-         nomeCompleto: req.body.nomeCompleto,
-         cpf: req.body.cpf,
-         email: req.body.email,
-         foto: req.body?.foto,
-         setor: req.body?.setor,
-         setorId: req.body?.setorId,
-         permissoes: [],
-      };
+      // const user: UserRegister = {
+      //    nomeCompleto: req.body.nomeCompleto,
+      //    cpf: req.body.cpf,
+      //    email: req.body.email,
+      //    foto: req.body?.foto,
+      //    setor: req.body?.setor,
+      //    setorId: req.body?.setorId,
+      //    permissoes: [],
+      // };
+      const user: UserRegister = req.body;
       try {
-         return res.json(await AccountRep.createUser(user));
+         return res.json(await AccountRep.createUser(user, req));
       } catch (error) {
          return res.status(401).send(error);
       }

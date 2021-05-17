@@ -1,9 +1,9 @@
 export interface Setor{
     id?: string;
     nome: string;
-    criadoEm?: any;
-    criadoPor?: string;
-    alteradoEm?: any;
-    alteradoPor?: string;
-    ativo?:boolean;
+    criadoEm: string;
+    criadoPor: string;
+    alteradoEm: string;
+    alteradoPor: string;
+    ativo: boolean;
 }

@@ -37,8 +37,8 @@ class TermoRep {
    async post(obj: Termo, req: Request) {
       try {
          const id = Guid.create().toString();
-         obj.criadoEm = firebase.firestore.Timestamp.fromDate(new Date());
-         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
+         obj.criadoEm = (new Date()).toDateString();
+         obj.alteradoEm = (new Date()).toDateString();
          obj.criadoPor = req.nome;
          obj.alteradoPor = req.nome;
          obj.ativo = true;
@@ -56,7 +56,7 @@ class TermoRep {
 
    async put(obj: Termo, id: string, req: Request) {
       try {
-         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
+         obj.alteradoEm = (new Date()).toDateString();
          obj.alteradoPor = req.nome;
          await this.db.collection('Termos').doc(id).update(obj);
          obj.id = id;
@@ -68,7 +68,7 @@ class TermoRep {
 
    async delete(obj: Termo, id: string, req: Request) {
       try {
-         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
+         obj.alteradoEm = (new Date()).toDateString();
          obj.alteradoPor = req.nome;
          obj.ativo = false;
          await this.db.collection('Termos').doc(id).update(obj);

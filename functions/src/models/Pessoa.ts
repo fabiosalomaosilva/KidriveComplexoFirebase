@@ -24,11 +24,11 @@ export interface Pessoa {
    documentos: Documento[];
    representante: Pessoa[];
 
-   criadoPor?: string;
-   criadoEm?: any;
-   alteradoPor?: string;
-   alteradoEm?: any;
-   ativo?: boolean;
+   criadoEm: string;
+   criadoPor: string;
+   alteradoEm: string;
+   alteradoPor: string;
+   ativo: boolean;
 }
 
 export enum TipoPessoaFisica {

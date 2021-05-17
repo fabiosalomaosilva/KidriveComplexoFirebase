@@ -13,11 +13,11 @@ export interface Termo {
    valor: number;
    objeto: string;
    documentos: Documento[];
-   criadoEm?: any;
-   criadoPor?: string;
-   alteradoEm?: any;
-   alteradoPor?: string;
-   ativo?: boolean;
+   criadoEm: string;
+   criadoPor: string;
+   alteradoEm: string;
+   alteradoPor: string;
+   ativo: boolean;
 }
 
 export enum TipoTermo {

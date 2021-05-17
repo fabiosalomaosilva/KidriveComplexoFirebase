@@ -1,3 +1,4 @@
+import { Request } from 'express';
 import firebase from "firebase";
 import admin from "firebase-admin";
 import jwt from "jsonwebtoken";
@@ -38,9 +39,14 @@ class AccountRep {
     }
   }
 
-  async createUser(user: UserRegister) {
+  async createUser(user: UserRegister, req: Request) {
     try {
       user.password = user.cpf;
+      user.criadoEm = (new Date()).toDateString();
+      user.alteradoEm = (new Date()).toDateString();
+      user.criadoPor = req.nome;
+      user.alteradoPor = req.nome;
+      user.ativo = true;
       await admin.auth().createUser(user);
       return await admin.auth().getUserByEmail(user.email);
     } catch (error) {
