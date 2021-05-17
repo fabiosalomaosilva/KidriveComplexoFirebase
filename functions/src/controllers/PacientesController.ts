@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Pessoa, TipoPessoa } from '../models/Pessoa';
+import { Pessoa, TipoPessoaFisica } from '../models/Pessoa';
 import PessoaRep from '../Repository/PessoaRep';
 
 class PacientesController {
@@ -25,7 +25,7 @@ class PacientesController {
    async post(req: Request, res: Response) {
       try {
          const obj: Pessoa = req.body;
-         obj.tipoPessoa = TipoPessoa.Paciente;
+         obj.tipoPessoa = TipoPessoaFisica.Paciente;
          const dados = await PessoaRep.post(obj, req);
          return res.json(dados);
       } catch (error) {

@@ -1,7 +1,4 @@
 import { Router } from 'express';
-
-import SetorRep from './Repository/SetorRep';
-import { Setor } from './models/Setor';
 import AccountController from './controllers/AccountController';
 import Autorize from './middlewares/AutorizeMiddleware';
 import PacientesController from './controllers/PacientesController';
@@ -32,12 +29,25 @@ router.post('/setores/', Autorize, SetoresController.post);
 router.put('/setores/', Autorize, SetoresController.put);
 router.delete('/setores/', Autorize, SetoresController.delete);
 
-router.post('/seed', async (req, res) => {
-   const setor: Setor = {
-      nome: 'Diretoria de Regulação',
-   };
-   const obj = await SetorRep.post(setor, req);
-   return res.json(obj);
-});
+router.get('/termos', Autorize, SetoresController.getAll);
+router.get('/termos/:id', Autorize, SetoresController.get);
+router.post('/termos/', Autorize, SetoresController.post);
+router.put('/termos/', Autorize, SetoresController.put);
+router.delete('/termos/', Autorize, SetoresController.delete);
+
+router.get('/requisicoes', Autorize, SetoresController.getAll);
+router.get('/requisicoes/:id', Autorize, SetoresController.get);
+router.post('/requisicoes/', Autorize, SetoresController.post);
+router.put('/requisicoes/', Autorize, SetoresController.put);
+router.delete('/requisicoes/', Autorize, SetoresController.delete);
+
+
+// router.post('/seed', async (req, res) => {
+//    const setor: Setor = {
+//       nome: 'Diretoria de Regulação',
+//    };
+//    const obj = await SetorRep.post(setor, req);
+//    return res.json(obj);
+// });
 
 export default router;

@@ -1,20 +1,19 @@
 import firebase from "firebase";
 import admin from "firebase-admin";
-import dotenv from "dotenv";
+import * as functions from "firebase-functions";
 
-dotenv.config();
 
 class FirebaseConfig {
   constructor() {
     const firebaseConfig = {
-      apiKey: process.env.APY_KEY,
-      authDomain: process.env.AUTH_DOMAIN,
-      databaseURL: process.env.DATABASE_URL,
-      projectId: process.env.PROJECT_ID,
-      storageBucket: process.env.STORAGE,
-      messagingSenderId: process.env.MESSAGE,
-      appId: process.env.APP_ID,
-      measurementId: process.env.MEASUREMENT,
+      apiKey: functions.config().service.apy_key,
+      authDomain: functions.config().service.auth_domain,
+      databaseURL: functions.config().service.database_url,
+      projectId: functions.config().service.project_id,
+      storageBucket: functions.config().service.storage,
+      messagingSenderId: functions.config().service.message,
+      appId: functions.config().service.app_id,
+      measurementId: functions.config().service.measurement,
     };
     const serviceAccount = require("../../fbconfig.json");
 

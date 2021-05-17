@@ -2,10 +2,11 @@ import { Request } from 'express';
 import firebase from "firebase";
 import admin from "firebase-admin";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+//import dotenv from "dotenv";
 import { UserRegister } from "../models/UserRegister";
+import * as functions from "firebase-functions";
 
-dotenv.config();
+//dotenv.config();
 
 class AccountRep {
   async login(email: string, password: string) {
@@ -16,7 +17,7 @@ class AccountRep {
       const userEmail = userCredential.user?.email;
       if (userEmail != null) {
         const user = await admin.auth().getUserByEmail(userEmail);
-        const secret = process.env.JWT_KEY;
+        const secret = functions.config().service.jwt_key;
         const token = jwt.sign(
           {
             nomeCompleto: user.displayName,
