@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import serviceAccount from '../../fbconfig.json';
+import serviceAccount from '../fbconfig.json';
 
 class FirebaseConfig {
    sa = serviceAccount as admin.ServiceAccount;

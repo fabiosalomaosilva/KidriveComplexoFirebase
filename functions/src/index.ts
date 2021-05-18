@@ -10,4 +10,4 @@ const app = express();
 app.use(cors());
 app.use(routes);
 
-exports.api = functions.https.onRequest(app);
+exports.appapi = functions.region('southamerica-east1').https.onRequest(app);

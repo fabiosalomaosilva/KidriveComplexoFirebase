@@ -10,7 +10,7 @@ class AccountController {
          if (data == null) {
             res.status(401).send('Usuário ou senha inseridos errados');
          }
-         return data;
+         return res.json(data);
       } catch (error) {
          return res.status(401).send(error);
       }
