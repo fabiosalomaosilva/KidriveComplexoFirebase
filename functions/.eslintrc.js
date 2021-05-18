@@ -5,7 +5,6 @@ module.exports = {
       node: true,
    },
    extends: [
-      'eslint:recommended',
       'plugin:import/errors',
       'plugin:import/warnings',
       'plugin:import/typescript',
@@ -23,7 +22,21 @@ module.exports = {
    ],
    plugins: ['@typescript-eslint', 'import'],
    rules: {
-      quotes: ['error', 'single'],
-      indent: ['error', 3],
+      'quotes': ['error', 'single'],
+      'indent': ['error', 3],
+      'object-curly-spacing': ['error', 'always'],
+      'new-cap': ['error', { 'newIsCap': true }],
+      'require-jsdoc': [
+         'error',
+         {
+            require: {
+               'FunctionDeclaration': false,
+               'MethodDefinition': false,
+               'ClassDeclaration': false,
+               'ArrowFunctionExpression': false,
+               'FunctionExpression': false,
+            },
+         },
+      ],
    },
 };

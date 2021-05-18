@@ -1,9 +1,9 @@
-import * as functions from "firebase-functions";
-import express from "express";
+import * as functions from 'firebase-functions';
+import express from 'express';
 import cors from 'cors';
 
-import "./configs/FirebaseConfig";
-import routes from "./Routes";
+import './configs/FirebaseConfig';
+import routes from './Routes';
 
 const app = express();
 

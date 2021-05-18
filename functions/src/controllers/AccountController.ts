@@ -7,8 +7,9 @@ class AccountController {
       const { email, password } = req.body;
       try {
          const data = await AccountRep.login(email, password);
-         if (data == null)
+         if (data == null) {
             res.status(401).send('Usuário ou senha inseridos errados');
+         }
          return data;
       } catch (error) {
          return res.status(401).send(error);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import firebase from 'firebase-admin';
 import { Request } from 'express';
 import { Guid } from 'guid-typescript';
@@ -37,15 +38,16 @@ class TermoRep {
    async post(obj: Termo, req: Request) {
       try {
          const id = Guid.create().toString();
-         obj.criadoEm = (new Date()).toDateString();
-         obj.alteradoEm = (new Date()).toDateString();
+         const dc = new Date(obj.dataContrato);
+         const dataFimContrato = new Date(
+            dc.setMonth(dc.getMonth() + obj.tempoVigencia)
+         );
+         obj.criadoEm = new Date().toDateString();
+         obj.alteradoEm = new Date().toDateString();
          obj.criadoPor = req.nome;
          obj.alteradoPor = req.nome;
          obj.ativo = true;
-         const dataContrato = new Date(obj.dataContrato);
-         obj.fimVigencia = new Date(
-            dataContrato.setMonth(dataContrato.getMonth() + obj.tempoVigencia)).toDateString();
-            
+         obj.fimVigencia = dataFimContrato.toDateString();
          await this.db.collection('Termos').doc(id).set(obj);
          obj.id = id;
          return obj;
@@ -56,7 +58,7 @@ class TermoRep {
 
    async put(obj: Termo, id: string, req: Request) {
       try {
-         obj.alteradoEm = (new Date()).toDateString();
+         obj.alteradoEm = new Date().toDateString();
          obj.alteradoPor = req.nome;
          await this.db.collection('Termos').doc(id).update(obj);
          obj.id = id;
@@ -68,7 +70,7 @@ class TermoRep {
 
    async delete(obj: Termo, id: string, req: Request) {
       try {
-         obj.alteradoEm = (new Date()).toDateString();
+         obj.alteradoEm = new Date().toDateString();
          obj.alteradoPor = req.nome;
          obj.ativo = false;
          await this.db.collection('Termos').doc(id).update(obj);

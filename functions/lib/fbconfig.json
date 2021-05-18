@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "kidrivecomplexo",
+    "private_key_id": "587521e80b3833817a44c8f76812bf18a5d1ff52",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDeeUpiWT82Of4T\naEywnRbHMxoYij0dX0C+lqhUHvhAVo0ZagznXheRSA/QpSNP4cWlRUmGQwCrPKaS\n3o7uXtTh3gJ7bfugwmsfqAtqYdh5Mhe2HEzB+gKibCZCGMWiV1/W+dutVI3wSRLR\noA5WKhXk++7zo1n/PtjvdoBx1xNI1k81WBfTsCNuHxyTRGXxZtFBrtYcK958K72u\nPvrp2CxjIiZNY/aDVgrD46xkiiAwm9mptnsDyAxDZlg9RQnaXyX9LH2r1sT5RK8J\niXCHjpjW0VeYXkmN9Gu0GkNx09WnJnlxHCFqOtPF9LRpH0PBwNeDih0HXJlesghv\nW7OkLq85AgMBAAECggEADzNG0Yrq/nu+YBmVedC13HThoNEbJV1beVomVJ8ME6tG\nNzkPeiRr5E2B5R3PWJcir6zY/e8ohcqeT/UcW22HyonmbgQA+AYolxBefU2Dop45\nUARFe1Bnay0L/SKfqDyji/bk20Ymb4cynbd7m0gDWHKdLDDaRo4G+O+GDaEmDGkV\nbdmyh+N0DxWq9zQfbAR+5oCh3TSHIiKwJNIXZd7pJnwQOW3tkvalwaRT84NjEEJk\nmRNefsafQ1sJIkbZ7Kq9OShhOoLp+hNCdDhF0U+bzkuFT4YT1+t9LhcPCyVKUnwk\n+L8O1JuGEQHBDa8ejsG5mtpvcBfPMzjBZKkrh9hGPQKBgQD/+DRu4YYdAyHLxc4B\ngyDT8ORa0ej9STfiHaYmghNNnI2oJyiJGx5gYlXCLDFwHcyXaTROA4T5yek+5yK3\nvyMazJ1/slMZBrCB4l1tHY69fEnVjehzjKqZiApis9SK8hSwFw05mddrfOGygUT8\n0cpM5ZPlFSW8BMZZtVJORj/OpQKBgQDegBDQfU5unGbAXa/fA0u5xHnKo6QQ+IiP\nKzflqLZrPOm5QDjiDr7dHlvQIV9qVICR/muII3VsfhLq7IKsAfSSPB2ZSZbaeLfo\nLTvDEAtQJXhAXMszYXI8Tn6GnSIReiRMXd9rjnMBWKZDf9GwAvEwhkMKXU+lZI6d\nbDyjqzYuBQKBgQDRtctXcKOND2zX4xZVPNZfbcPY+JM3OI51Ta87a2RfOL0CIBrg\nwXwQoV/7dnOGlJNzFTlKFS4T7C2RYJKcEheztCHxZesY3NctgoTiic3RRovDT8E7\nMervYHqJxSWENLNoVWp7X6QTJzxOIASiUUq513lkvP+uXAcZpilpgbpzFQKBgCrz\nV8uXVMufX2pk621GapjKp6QJYMNx5pKUii7IGaar1IZRMmnY5Nk0Yg7UUmHpPARy\ns3lNNv6he69jxnnDyt1rw17yyK8VvJKSIMYv0689/G+YOhWKCw4/LMd5j7kF9fnT\n6SwPDH5HCZlgFC9A8iQm1swqZRSNS8ZxvWbuxv+tAoGALWDdl4TcwaA33oaeGPx+\nahVffBOxf9QkJcKew9JMIp7CW/bn/lmJ3eTHlmIHavHZt7Z3sfjA5zioF+XECQmd\nzsMOfkCFnP5tsdB2C2HZR60K4La2zE211OK5yYDxpDO4znzrCZzLyJB81IazZn7Z\nF73xbYJV2DYzT3XzFzhWM7I=\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-jjr6j@kidrivecomplexo.iam.gserviceaccount.com",
+    "client_id": "117339942905550785580",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-jjr6j%40kidrivecomplexo.iam.gserviceaccount.com"
+}

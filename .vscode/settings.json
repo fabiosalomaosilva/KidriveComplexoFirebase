@@ -4,5 +4,6 @@
         "Requisicoes",
         "extensao",
         "fbconfig"
-    ]
+    ],
+    "files.eol": "\n"
 }

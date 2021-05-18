@@ -45,7 +45,7 @@ class SetoresController {
 
    async delete(req: Request, res: Response) {
       try {
-         const obj: Setor = req.body;         
+         const obj: Setor = req.body;
          const id = req.body.id;
          const dados = await SetorRep.delete(obj, id, req);
          return res.json(dados);

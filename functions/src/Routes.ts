@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 import { Router } from 'express';
 import AccountController from './controllers/AccountController';
 import Autorize from './middlewares/AutorizeMiddleware';
@@ -40,7 +41,6 @@ router.get('/requisicoes/:id', Autorize, SetoresController.get);
 router.post('/requisicoes/', Autorize, SetoresController.post);
 router.put('/requisicoes/', Autorize, SetoresController.put);
 router.delete('/requisicoes/', Autorize, SetoresController.delete);
-
 
 // router.post('/seed', async (req, res) => {
 //    const setor: Setor = {
