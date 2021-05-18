@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import firebase from 'firebase-admin';
 import { Request } from 'express';
 import { Guid } from 'guid-typescript';

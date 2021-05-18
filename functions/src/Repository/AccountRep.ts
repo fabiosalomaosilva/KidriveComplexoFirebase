@@ -15,19 +15,14 @@ class AccountRep {
          if (userEmail != null) {
             const user = await admin.auth().getUserByEmail(userEmail);
             const secret = functions.config().service.jwt_key;
+            user.passwordHash = undefined;
             const token = jwt.sign(
-               {
-                  nomeCompleto: user.displayName,
-                  email: user.email,
-                  id: user.uid,
-               },
+               user,
                secret as string,
                { expiresIn: '20d' }
             );
             return {
-               nomeCompleto: user.displayName,
-               email: user.email,
-               id: user.uid,
+               user,
                token: token,
             };
          }
