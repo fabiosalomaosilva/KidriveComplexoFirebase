@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import admin from 'firebase-admin';
 import jwt from 'jsonwebtoken';
 import config from '../configs/config';
+import { User } from '../models/User';
 import { UserRegister } from '../models/UserRegister';
 
 class AccountRep {
@@ -18,11 +19,17 @@ class AccountRep {
             .signInWithEmailAndPassword(email, password);
          const userEmail = userCredential.user?.email;
          if (userEmail != null) {
-            const ref = this.db.collection('pessoas');
+            const ref = this.db.collection('Users');
             const doc = await ref.doc(userCredential.user?.uid as string).get();
-            const user = doc.data() as UserRegister;
+            const user = doc.data();
+            delete user?.password;
+            delete user?.alteradoEm;
+            delete user?.alteradoPor;
+            delete user?.criadoEm;
+            delete user?.criadoPor;
+            delete user?.ativo;
             const secret = config.JWT_KEY as string;
-            const token = jwt.sign(user as UserRegister, secret as string, {
+            const token = jwt.sign(user as User, secret as string, {
                expiresIn: '20d',
             });
             return {
@@ -45,8 +52,8 @@ class AccountRep {
 
          user.criadoEm = new Date().toDateString();
          user.alteradoEm = new Date().toDateString();
-         user.criadoPor = req.nome;
-         user.alteradoPor = req.nome;
+         user.criadoPor = req.nome == undefined ? 'administrador' : req.nome;
+         user.alteradoPor = req.nome == undefined ? 'administrador' : req.nome;
          user.ativo = true;
          user.uid = userResult.user?.uid;
          await this.db
@@ -54,7 +61,7 @@ class AccountRep {
             .doc(user.uid as string)
             .set(user);
          user.password = '';
-         return user;
+         return user as User;
       } catch (error) {
          throw error;
       }

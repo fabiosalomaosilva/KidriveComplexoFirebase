@@ -8,7 +8,7 @@ export interface UserRegister {
    setor: string;
    setorId: string;
    cargo: string;
-   permissoes: [];
+   permissoes?: [];
 
    criadoEm: string;
    criadoPor: string;
