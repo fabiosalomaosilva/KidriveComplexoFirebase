@@ -1,7 +1,7 @@
 import { Pessoa } from './Pessoa';
 
 export interface Requisicao {
-   id?: string;
+   uid?: string;
    numero: number;
    contrato: string;
    dataRequisicao: string;

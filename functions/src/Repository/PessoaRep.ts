@@ -24,10 +24,10 @@ class PessoaRep {
       }
    }
 
-   async get(id: string) {
+   async get(uid: string) {
       const ref = this.db.collection('pessoas');
       try {
-         const snapshot = await ref.doc(id).get();
+         const snapshot = await ref.doc(uid).get();
          if (!snapshot.exists) return null;
          return snapshot.data();
       } catch (error) {
@@ -37,39 +37,39 @@ class PessoaRep {
 
    async post(obj: Pessoa, req: Request) {
       try {
-         const id = Guid.create().toString();
+         const uid = Guid.create().toString();
          obj.criadoEm = new Date().toDateString();
          obj.alteradoEm = new Date().toDateString();
          obj.criadoPor = req.nome;
          obj.alteradoPor = req.nome;
          obj.ativo = true;
-         await this.db.collection('pessoas').doc(id).set(obj);
-         obj.id = id;
+         await this.db.collection('pessoas').doc(uid).set(obj);
+         obj.uid = uid;
          return obj;
       } catch (error) {
          throw error;
       }
    }
 
-   async put(obj: Pessoa, id: string, req: Request) {
+   async put(obj: Pessoa, uid: string, req: Request) {
       try {
          obj.alteradoEm = new Date().toDateString();
          obj.alteradoPor = req.nome;
-         await this.db.collection('pessoas').doc(id).update(obj);
-         obj.id = id;
+         await this.db.collection('pessoas').doc(uid).update(obj);
+         obj.uid = uid;
          return obj;
       } catch (error) {
          throw error;
       }
    }
 
-   async delete(obj: Pessoa, id: string, req: Request) {
+   async delete(obj: Pessoa, uid: string, req: Request) {
       try {
          obj.alteradoEm = new Date().toDateString();
          obj.alteradoPor = req.nome;
          obj.ativo = false;
-         await this.db.collection('pessoas').doc(id).update(obj);
-         obj.id = id;
+         await this.db.collection('pessoas').doc(uid).update(obj);
+         obj.uid = uid;
          return obj;
       } catch (error) {
          throw error;

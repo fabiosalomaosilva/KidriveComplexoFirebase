@@ -24,10 +24,10 @@ class TermoRep {
       }
    }
 
-   async get(id: string) {
+   async get(uid: string) {
       const ref = this.db.collection('Termos');
       try {
-         const snapshot = await ref.doc(id).get();
+         const snapshot = await ref.doc(uid).get();
          if (!snapshot.exists) return null;
          return snapshot.data();
       } catch (error) {
@@ -37,7 +37,7 @@ class TermoRep {
 
    async post(obj: Termo, req: Request) {
       try {
-         const id = Guid.create().toString();
+         const uid = Guid.create().toString();
          const dc = new Date(obj.dataContrato);
          const dataFimContrato = new Date(
             dc.setMonth(dc.getMonth() + obj.tempoVigencia)
@@ -48,33 +48,33 @@ class TermoRep {
          obj.alteradoPor = req.nome;
          obj.ativo = true;
          obj.fimVigencia = dataFimContrato.toDateString();
-         await this.db.collection('Termos').doc(id).set(obj);
-         obj.id = id;
+         await this.db.collection('Termos').doc(uid).set(obj);
+         obj.uid = uid;
          return obj;
       } catch (error) {
          throw error;
       }
    }
 
-   async put(obj: Termo, id: string, req: Request) {
+   async put(obj: Termo, uid: string, req: Request) {
       try {
          obj.alteradoEm = new Date().toDateString();
          obj.alteradoPor = req.nome;
-         await this.db.collection('Termos').doc(id).update(obj);
-         obj.id = id;
+         await this.db.collection('Termos').doc(uid).update(obj);
+         obj.uid = uid;
          return obj;
       } catch (error) {
          throw error;
       }
    }
 
-   async delete(obj: Termo, id: string, req: Request) {
+   async delete(obj: Termo, uid: string, req: Request) {
       try {
          obj.alteradoEm = new Date().toDateString();
          obj.alteradoPor = req.nome;
          obj.ativo = false;
-         await this.db.collection('Termos').doc(id).update(obj);
-         obj.id = id;
+         await this.db.collection('Termos').doc(uid).update(obj);
+         obj.uid = uid;
          return obj;
       } catch (error) {
          throw error;

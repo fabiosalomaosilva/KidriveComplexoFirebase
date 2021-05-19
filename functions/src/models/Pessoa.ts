@@ -3,7 +3,7 @@ import { TipoEndereco } from './Endereco';
 import { Telefone } from './Telefone';
 
 export interface Pessoa {
-   id?: string;
+   uid?: string;
    naturezaPessoa: NaturezaPessoa;
 
    tipoPessoa: TipoPessoaFisica;

@@ -1,21 +1,21 @@
 import firebase from 'firebase';
 import admin from 'firebase-admin';
-import * as functions from 'firebase-functions';
 import serviceAccount from '../fbconfig.json';
+import Config from './config';
 
 class FirebaseConfig {
    sa = serviceAccount as admin.ServiceAccount;
 
    constructor() {
       const firebaseConfig = {
-         apiKey: functions.config().service.apy_key,
-         authDomain: functions.config().service.auth_domain,
-         databaseURL: functions.config().service.database_url,
-         projectId: functions.config().service.project_id,
-         storageBucket: functions.config().service.storage,
-         messagingSenderId: functions.config().service.message,
-         appId: functions.config().service.app_id,
-         measurementId: functions.config().service.measurement,
+         apiKey: Config.APY_KEY,
+         authDomain: Config.AUTH_DOMAIN,
+         databaseURL: Config.DATABASE_URL,
+         projectId: Config.PROJECT_ID,
+         storageBucket: Config.STORAGE,
+         messagingSenderId: Config.MESSAGE,
+         appId: Config.APP_ID,
+         measurementId: Config.MEASUREMENT,
       };
 
       // Initialize Firebase

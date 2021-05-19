@@ -1,11 +1,16 @@
+/* eslint-disable spaced-comment */
 import { Request } from 'express';
 import firebase from 'firebase';
 import admin from 'firebase-admin';
 import jwt from 'jsonwebtoken';
+import config from '../configs/config';
 import { UserRegister } from '../models/UserRegister';
-import * as functions from 'firebase-functions';
 
 class AccountRep {
+   db: FirebaseFirestore.Firestore;
+   constructor() {
+      this.db = admin.firestore();
+   }
    async login(email: string, password: string) {
       try {
          const userCredential = await firebase
@@ -13,16 +18,15 @@ class AccountRep {
             .signInWithEmailAndPassword(email, password);
          const userEmail = userCredential.user?.email;
          if (userEmail != null) {
-            const user = await admin.auth().getUserByEmail(userEmail);
-            const secret = functions.config().service.jwt_key;
-            user.passwordHash = undefined;
-            const token = jwt.sign(
-               user,
-               secret as string,
-               { expiresIn: '20d' }
-            );
+            const ref = this.db.collection('pessoas');
+            const doc = await ref.doc(userCredential.user?.uid as string).get();
+            const user = doc.data() as UserRegister;
+            const secret = config.JWT_KEY as string;
+            const token = jwt.sign(user as UserRegister, secret as string, {
+               expiresIn: '20d',
+            });
             return {
-               user,
+               user: user,
                token: token,
             };
          }
@@ -35,13 +39,22 @@ class AccountRep {
    async createUser(user: UserRegister, req: Request) {
       try {
          user.password = user.cpf;
+         const userResult = await firebase
+            .auth()
+            .createUserWithEmailAndPassword(user.email, user.password);
+
          user.criadoEm = new Date().toDateString();
          user.alteradoEm = new Date().toDateString();
          user.criadoPor = req.nome;
          user.alteradoPor = req.nome;
          user.ativo = true;
-         await admin.auth().createUser(user);
-         return await admin.auth().getUserByEmail(user.email);
+         user.uid = userResult.user?.uid;
+         await this.db
+            .collection('Users')
+            .doc(user.uid as string)
+            .set(user);
+         user.password = '';
+         return user;
       } catch (error) {
          throw error;
       }

@@ -2,7 +2,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { TokenPayload } from '../models/TokenPayload';
-import * as functions from 'firebase-functions';
+import config from '../configs/config';
 
 
 export default function AutorizeAuth(
@@ -15,7 +15,7 @@ export default function AutorizeAuth(
       .replace('bearer', '')
       .trim();
    if (authorization == null) return res.sendStatus(401);
-   const secret = functions.config().service.jwt_key as string;
+   const secret = config.JWT_KEY as string;
    try {
       const data = jwt.verify(authorization, secret);
       const { email } = data as TokenPayload;

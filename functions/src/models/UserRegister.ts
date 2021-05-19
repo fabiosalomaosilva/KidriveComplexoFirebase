@@ -1,4 +1,5 @@
 export interface UserRegister {
+   uid?:string;
    nomeCompleto: string;
    email: string;
    password: string;

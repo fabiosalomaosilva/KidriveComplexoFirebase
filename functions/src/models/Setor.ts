@@ -1,5 +1,5 @@
 export interface Setor {
-   id?: string;
+   uid?: string;
    nome: string;
    criadoEm: string;
    criadoPor: string;
