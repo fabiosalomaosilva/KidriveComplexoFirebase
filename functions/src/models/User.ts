@@ -8,7 +8,6 @@ export interface User {
     setorId: string;
     cargo: string;
     permissoes?: [];
- 
     criadoEm: string;
     criadoPor: string;
     alteradoEm: string;
