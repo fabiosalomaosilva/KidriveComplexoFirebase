@@ -8,11 +8,19 @@ class AccountController {
       try {
          const data = await AccountRep.login(email, password);
          if (data == null) {
-            res.status(401).send('Usuário ou senha inseridos errados');
+            res.status(401).json({
+               successful: false,
+               error: 'O e-mail não foi informado',
+            });
          }
          return res.json(data);
       } catch (error) {
-         return res.status(401).send(error);
+         return res
+            .status(401)
+            .json({
+               successful: false,
+               error: error,
+            });
       }
    }
 
@@ -30,7 +38,10 @@ class AccountController {
       try {
          return res.json(await AccountRep.createUser(user, req));
       } catch (error) {
-         return res.status(401).send(error);
+         return res.status(401).json({
+            Successful: false,
+            Error: error,
+         });
       }
    }
 

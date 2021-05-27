@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import config from '../configs/config';
 import { User } from '../models/User';
 import { UserRegister } from '../models/UserRegister';
+import { UserResult } from '../models/UserResult';
 
 class AccountRep {
    db: FirebaseFirestore.Firestore;
@@ -18,26 +19,32 @@ class AccountRep {
             .auth()
             .signInWithEmailAndPassword(email, password);
          const userEmail = userCredential.user?.email;
-         if (userEmail != null) {
-            const ref = this.db.collection('Users');
-            const doc = await ref.doc(userCredential.user?.uid as string).get();
-            const user = doc.data();
-            delete user?.password;
-            delete user?.alteradoEm;
-            delete user?.alteradoPor;
-            delete user?.criadoEm;
-            delete user?.criadoPor;
-            delete user?.ativo;
+         if (userEmail == null) return null;
+         const ref = this.db.collection('Users');
+         const doc = await ref.doc(userCredential.user?.uid as string).get();
+         if (doc.exists == true) {
+            const user = doc.data() as User;
+            const userResult: UserResult = {
+               nomeCompleto: user.nomeCompleto,
+               email: user.email,
+               cargo: user.cargo,
+               setor: user.setor,
+               setorId: user.setorId,
+               foto: user.foto,
+               successful: true,
+               token: '',
+            };
+
             const secret = config.JWT_KEY as string;
-            const token = jwt.sign(user as User, secret as string, {
+            userResult.token = jwt.sign(userResult, secret as string, {
                expiresIn: '20d',
             });
-            return {
-               user: user,
-               token: token,
-            };
+            return userResult;
          }
-         return null;
+         return {
+            successful: false,
+            error: 'Usuário ou a senha estão errados',
+         };
       } catch (error) {
          throw error;
       }

@@ -14,3 +14,4 @@ export interface User {
     alteradoPor: string;
     ativo: boolean;
  }
+
