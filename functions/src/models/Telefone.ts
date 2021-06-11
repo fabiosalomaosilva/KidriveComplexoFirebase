@@ -1,4 +1,5 @@
 export interface Telefone {
+   uid:string;
    numero: string;
    tipoTelefone: TipoTelefone;
    quemAtende: string;

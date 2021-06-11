@@ -1,4 +1,5 @@
 export interface Telefone {
+   uid:string;
    tipoEndereco: TipoEndereco;
    logradouro: string;
    numero: string;

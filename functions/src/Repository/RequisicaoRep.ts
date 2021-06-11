@@ -38,10 +38,10 @@ class RequisicaoRep {
    async post(obj: Requisicao, req: Request) {
       try {
          const uid = Guid.create().toString();
-         obj.criadoEm = (new Date()).toDateString();
-         obj.alteradoEm = (new Date()).toDateString();
-         obj.criadoPor = req.nome;
-         obj.alteradoPor = req.nome;
+         obj.criadoEm = new Date().toDateString();
+         obj.alteradoEm = new Date().toDateString();
+         obj.criadoPor = req.email;
+         obj.alteradoPor = req.email;
          obj.ativo = true;
          await this.db.collection('Requisicoes').doc(uid).set(obj);
          obj.uid = uid;
@@ -53,8 +53,8 @@ class RequisicaoRep {
 
    async put(obj: Requisicao, uid: string, req: Request) {
       try {
-         obj.alteradoEm = (new Date()).toDateString();
-         obj.alteradoPor = req.nome;
+         obj.alteradoEm = new Date().toDateString();
+         obj.alteradoPor = req.email;
          await this.db.collection('Requisicoes').doc(uid).update(obj);
          obj.uid = uid;
          return obj;
@@ -65,8 +65,8 @@ class RequisicaoRep {
 
    async delete(obj: Requisicao, uid: string, req: Request) {
       try {
-         obj.alteradoEm = (new Date()).toDateString();
-         obj.alteradoPor = req.nome;
+         obj.alteradoEm = new Date().toDateString();
+         obj.alteradoPor = req.email;
          obj.ativo = false;
          await this.db.collection('Requisicoes').doc(uid).update(obj);
          obj.uid = uid;

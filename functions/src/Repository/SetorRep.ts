@@ -40,8 +40,8 @@ class SetorRep {
          const uid = Guid.create().toString();
          obj.criadoEm = new Date().toDateString();
          obj.alteradoEm = new Date().toDateString();
-         obj.criadoPor = req.nome;
-         obj.alteradoPor = req.nome;
+         obj.criadoPor = req.email;
+         obj.alteradoPor = req.email;
          obj.ativo = true;
          await this.db.collection('setores').doc(uid).set(obj);
          obj.uid = uid;
@@ -54,7 +54,7 @@ class SetorRep {
    async put(obj: Setor, uid: string, req: Request) {
       try {
          obj.alteradoEm = new Date().toDateString();
-         obj.alteradoPor = req.nome;
+         obj.alteradoPor = req.email;
          await this.db.collection('setores').doc(uid).update(obj);
          obj.uid = uid;
          return obj;
@@ -66,7 +66,7 @@ class SetorRep {
    async delete(obj: Setor, uid: string, req: Request) {
       try {
          obj.alteradoEm = new Date().toDateString();
-         obj.alteradoPor = req.nome;
+         obj.alteradoPor = req.email;
          obj.ativo = false;
          await this.db.collection('setores').doc(uid).update(obj);
          obj.uid = uid;

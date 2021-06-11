@@ -12,7 +12,7 @@ class TermoRep {
    }
 
    async getAll() {
-      const ref = this.db.collection('Termos');
+      const ref = this.db.collection('termos');
       const lista: Termo[] = [];
       try {
          const snapshot = await ref.where('ativo', '==', true).get();
@@ -25,7 +25,7 @@ class TermoRep {
    }
 
    async get(uid: string) {
-      const ref = this.db.collection('Termos');
+      const ref = this.db.collection('termos');
       try {
          const snapshot = await ref.doc(uid).get();
          if (!snapshot.exists) return null;
@@ -44,11 +44,11 @@ class TermoRep {
          );
          obj.criadoEm = new Date().toDateString();
          obj.alteradoEm = new Date().toDateString();
-         obj.criadoPor = req.nome;
-         obj.alteradoPor = req.nome;
+         obj.criadoPor = req.email;
+         obj.alteradoPor = req.email;
          obj.ativo = true;
          obj.fimVigencia = dataFimContrato.toDateString();
-         await this.db.collection('Termos').doc(uid).set(obj);
+         await this.db.collection('termos').doc(uid).set(obj);
          obj.uid = uid;
          return obj;
       } catch (error) {
@@ -59,8 +59,8 @@ class TermoRep {
    async put(obj: Termo, uid: string, req: Request) {
       try {
          obj.alteradoEm = new Date().toDateString();
-         obj.alteradoPor = req.nome;
-         await this.db.collection('Termos').doc(uid).update(obj);
+         obj.alteradoPor = req.email;
+         await this.db.collection('termos').doc(uid).update(obj);
          obj.uid = uid;
          return obj;
       } catch (error) {
@@ -73,7 +73,7 @@ class TermoRep {
          obj.alteradoEm = new Date().toDateString();
          obj.alteradoPor = req.nome;
          obj.ativo = false;
-         await this.db.collection('Termos').doc(uid).update(obj);
+         await this.db.collection('termos').doc(uid).update(obj);
          obj.uid = uid;
          return obj;
       } catch (error) {
