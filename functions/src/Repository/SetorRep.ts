@@ -1,9 +1,11 @@
+/* eslint-disable new-cap */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import firebase from 'firebase-admin';
 import { Request } from 'express';
 import { Guid } from 'guid-typescript';
 
-import { Setor } from '../models/Setor';
+import SetorDto, { Setor } from '../models/Setor';
+import ConvertToSetorDto from '../mapper/ConvertToSetorDto';
 
 class SetorRep {
    db: FirebaseFirestore.Firestore;
@@ -18,7 +20,12 @@ class SetorRep {
          const snapshot = await ref.where('ativo', '==', true).get();
          if (snapshot.empty) return lista;
          snapshot.forEach((doc: any) => lista.push(doc.data()));
-         return lista;
+         const listaDto: SetorDto[] = [];
+         lista.map((i) => {
+            const item = ConvertToSetorDto.Convert(i);
+            listaDto.push(item);
+         });
+         return listaDto;
       } catch (error) {
          throw error;
       }
@@ -38,13 +45,12 @@ class SetorRep {
    async post(obj: Setor, req: Request) {
       try {
          const uid = Guid.create().toString();
-         obj.criadoEm = new Date().toDateString();
-         obj.alteradoEm = new Date().toDateString();
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(new Date());
+         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.criadoPor = req.email;
          obj.alteradoPor = req.email;
          obj.ativo = true;
          await this.db.collection('setores').doc(uid).set(obj);
-         obj.uid = uid;
          return obj;
       } catch (error) {
          throw error;
@@ -53,11 +59,12 @@ class SetorRep {
 
    async put(obj: Setor, uid: string, req: Request) {
       try {
-         obj.alteradoEm = new Date().toDateString();
+         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          await this.db.collection('setores').doc(uid).update(obj);
-         obj.uid = uid;
-         return obj;
+         const setor = ConvertToSetorDto.Convert(obj);
+         setor.id = uid;
+         return setor;
       } catch (error) {
          throw error;
       }
@@ -65,12 +72,13 @@ class SetorRep {
 
    async delete(obj: Setor, uid: string, req: Request) {
       try {
-         obj.alteradoEm = new Date().toDateString();
+         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          obj.ativo = false;
          await this.db.collection('setores').doc(uid).update(obj);
-         obj.uid = uid;
-         return obj;
+         const setor = ConvertToSetorDto.Convert(obj);
+         setor.id = uid;
+         return setor;
       } catch (error) {
          throw error;
       }

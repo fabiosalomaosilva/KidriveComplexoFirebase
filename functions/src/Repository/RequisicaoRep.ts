@@ -12,7 +12,7 @@ class RequisicaoRep {
    }
 
    async getAll() {
-      const ref = this.db.collection('Requisicoes');
+      const ref = this.db.collection('requisicoes');
       const lista: Requisicao[] = [];
       try {
          const snapshot = await ref.where('ativo', '==', true).get();
@@ -25,7 +25,7 @@ class RequisicaoRep {
    }
 
    async get(uid: string) {
-      const ref = this.db.collection('Requisicoes');
+      const ref = this.db.collection('requisicoes');
       try {
          const snapshot = await ref.doc(uid).get();
          if (!snapshot.exists) return null;
@@ -38,12 +38,12 @@ class RequisicaoRep {
    async post(obj: Requisicao, req: Request) {
       try {
          const uid = Guid.create().toString();
-         obj.criadoEm = new Date().toDateString();
-         obj.alteradoEm = new Date().toDateString();
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(new Date());
+         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.criadoPor = req.email;
          obj.alteradoPor = req.email;
          obj.ativo = true;
-         await this.db.collection('Requisicoes').doc(uid).set(obj);
+         await this.db.collection('requisicoes').doc(uid).set(obj);
          obj.uid = uid;
          return obj;
       } catch (error) {
@@ -53,9 +53,9 @@ class RequisicaoRep {
 
    async put(obj: Requisicao, uid: string, req: Request) {
       try {
-         obj.alteradoEm = new Date().toDateString();
+         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
-         await this.db.collection('Requisicoes').doc(uid).update(obj);
+         await this.db.collection('requisicoes').doc(uid).update(obj);
          obj.uid = uid;
          return obj;
       } catch (error) {
@@ -65,10 +65,10 @@ class RequisicaoRep {
 
    async delete(obj: Requisicao, uid: string, req: Request) {
       try {
-         obj.alteradoEm = new Date().toDateString();
+         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          obj.ativo = false;
-         await this.db.collection('Requisicoes').doc(uid).update(obj);
+         await this.db.collection('requisicoes').doc(uid).update(obj);
          obj.uid = uid;
          return obj;
       } catch (error) {

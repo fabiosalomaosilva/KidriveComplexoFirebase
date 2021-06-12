@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import firebase from 'firebase-admin';
+import firebase, { firestore } from 'firebase-admin';
 import { Request } from 'express';
 import { Guid } from 'guid-typescript';
 
@@ -38,8 +38,8 @@ class PessoaRep {
    async post(obj: Pessoa, req: Request) {
       try {
          const uid = Guid.create().toString();
-         obj.criadoEm = new Date().toDateString();
-         obj.alteradoEm = new Date().toDateString();
+         obj.criadoEm = firestore.Timestamp.fromDate(new Date());
+         obj.alteradoEm = firestore.Timestamp.fromDate(new Date());
          obj.criadoPor = req.email;
          obj.alteradoPor = req.email;
          obj.ativo = true;
@@ -53,7 +53,7 @@ class PessoaRep {
 
    async put(obj: Pessoa, uid: string, req: Request) {
       try {
-         obj.alteradoEm = new Date().toDateString();
+         obj.alteradoEm = firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          await this.db.collection('pessoas').doc(uid).update(obj);
          obj.uid = uid;
@@ -65,7 +65,7 @@ class PessoaRep {
 
    async delete(obj: Pessoa, uid: string, req: Request) {
       try {
-         obj.alteradoEm = new Date().toDateString();
+         obj.alteradoEm = firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          obj.ativo = false;
          await this.db.collection('pessoas').doc(uid).update(obj);

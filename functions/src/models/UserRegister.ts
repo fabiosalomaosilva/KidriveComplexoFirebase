@@ -1,5 +1,7 @@
+import { firestore } from 'firebase-admin';
+
 export interface UserRegister {
-   uid?:string;
+   uid?: string;
    nomeCompleto: string;
    email: string;
    password: string;
@@ -10,9 +12,9 @@ export interface UserRegister {
    cargo: string;
    permissoes?: [];
 
-   criadoEm: string;
+   criadoEm: firestore.Timestamp;
    criadoPor: string;
-   alteradoEm: string;
+   alteradoEm: firestore.Timestamp;
    alteradoPor: string;
    ativo: boolean;
 }

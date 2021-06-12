@@ -1,3 +1,4 @@
+import { firestore } from 'firebase-admin';
 import { Documento } from './Documento';
 import { TipoEndereco } from './Endereco';
 import { Telefone } from './Telefone';
@@ -24,9 +25,9 @@ export interface Pessoa {
    documentos: Documento[];
    representante: Pessoa[];
 
-   criadoEm: string;
+   criadoEm: firestore.Timestamp;
    criadoPor: string;
-   alteradoEm: string;
+   alteradoEm: firestore.Timestamp;
    alteradoPor: string;
    ativo: boolean;
 }

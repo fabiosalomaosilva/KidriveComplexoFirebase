@@ -1,3 +1,4 @@
+import { firestore } from 'firebase-admin';
 import { Pessoa } from './Pessoa';
 
 export interface Requisicao {
@@ -12,9 +13,9 @@ export interface Requisicao {
    localDestino: string;
    descricao: string;
 
-   criadoEm: string;
+   criadoEm: firestore.Timestamp;
    criadoPor: string;
-   alteradoEm: string;
+   alteradoEm: firestore.Timestamp;
    alteradoPor: string;
    ativo: boolean;
 }

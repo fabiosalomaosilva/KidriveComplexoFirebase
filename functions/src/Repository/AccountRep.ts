@@ -57,8 +57,8 @@ class AccountRep {
             .auth()
             .createUserWithEmailAndPassword(user.email, user.password);
 
-         user.criadoEm = new Date().toDateString();
-         user.alteradoEm = new Date().toDateString();
+         user.criadoEm = admin.firestore.Timestamp.fromDate(new Date());
+         user.alteradoEm = admin.firestore.Timestamp.fromDate(new Date());
          user.criadoPor = req.nome == undefined ? 'administrador' : req.nome;
          user.alteradoPor = req.nome == undefined ? 'administrador' : req.nome;
          user.ativo = true;

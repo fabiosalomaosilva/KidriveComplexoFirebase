@@ -42,8 +42,8 @@ class TermoRep {
          const dataFimContrato = new Date(
             dc.setMonth(dc.getMonth() + obj.tempoVigencia)
          );
-         obj.criadoEm = new Date().toDateString();
-         obj.alteradoEm = new Date().toDateString();
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(new Date());
+         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.criadoPor = req.email;
          obj.alteradoPor = req.email;
          obj.ativo = true;
@@ -58,7 +58,7 @@ class TermoRep {
 
    async put(obj: Termo, uid: string, req: Request) {
       try {
-         obj.alteradoEm = new Date().toDateString();
+         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          await this.db.collection('termos').doc(uid).update(obj);
          obj.uid = uid;
@@ -70,7 +70,7 @@ class TermoRep {
 
    async delete(obj: Termo, uid: string, req: Request) {
       try {
-         obj.alteradoEm = new Date().toDateString();
+         obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.nome;
          obj.ativo = false;
          await this.db.collection('termos').doc(uid).update(obj);

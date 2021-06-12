@@ -1,3 +1,4 @@
+import { firestore } from 'firebase-admin';
 import { Documento } from './Documento';
 import { Pessoa } from './Pessoa';
 
@@ -13,9 +14,9 @@ export interface Termo {
    valor: number;
    objeto: string;
    documentos: Documento[];
-   criadoEm: string;
+   criadoEm: firestore.Timestamp;
    criadoPor: string;
-   alteradoEm: string;
+   alteradoEm: firestore.Timestamp;
    alteradoPor: string;
    ativo: boolean;
 }
