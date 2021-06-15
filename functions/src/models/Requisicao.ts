@@ -19,3 +19,5 @@ export interface Requisicao {
    alteradoPor: string;
    ativo: boolean;
 }
+
+

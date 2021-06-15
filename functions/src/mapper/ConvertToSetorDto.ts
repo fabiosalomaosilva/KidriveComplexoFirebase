@@ -1,10 +1,9 @@
-import SetorDto, { Setor } from '../models/Setor';
+import { Setor } from '../models/Setor';
 
 class ConvertToSetorDto {
-   setorDTO: SetorDto = new SetorDto();
-
    Convert(setor: Setor) {
-      this.setorDTO = {
+      return {
+         id: '',
          nome: setor.nome,
          criadoEm: setor.criadoEm.toDate(),
          criadoPor: setor.criadoPor,
@@ -12,7 +11,6 @@ class ConvertToSetorDto {
          alteradoPor: setor.alteradoPor,
          ativo: setor.ativo,
       };
-      return this.setorDTO;
    }
 }
 

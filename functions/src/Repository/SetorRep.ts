@@ -4,7 +4,7 @@ import firebase from 'firebase-admin';
 import { Request } from 'express';
 import { Guid } from 'guid-typescript';
 
-import SetorDto, { Setor } from '../models/Setor';
+import { Setor } from '../models/Setor';
 import ConvertToSetorDto from '../mapper/ConvertToSetorDto';
 
 class SetorRep {
@@ -20,7 +20,7 @@ class SetorRep {
          const snapshot = await ref.where('ativo', '==', true).get();
          if (snapshot.empty) return lista;
          snapshot.forEach((doc: any) => lista.push(doc.data()));
-         const listaDto: SetorDto[] = [];
+         const listaDto: any[] = [];
          lista.map((i) => {
             const item = ConvertToSetorDto.Convert(i);
             listaDto.push(item);

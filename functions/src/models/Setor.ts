@@ -9,13 +9,3 @@ export interface Setor {
    ativo: boolean;
 }
 
-class SetorDto {
-   id?: string;
-   nome!: string;
-   criadoEm!: Date;
-   criadoPor!: string;
-   alteradoEm!: Date;
-   alteradoPor!: string;
-   ativo!: boolean;
-}
-export default SetorDto;
