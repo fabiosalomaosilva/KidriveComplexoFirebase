@@ -3,7 +3,7 @@ import { Termo } from '../models/Termo';
 class ConvertToTermoDto {
    Convert(obj: Termo) {
       return {
-         id: '',
+         id: obj.id,
          tipoTermo: obj.tipoTermo,
          numero: obj.numero,
          numeroProcesso: obj.numeroProcesso,

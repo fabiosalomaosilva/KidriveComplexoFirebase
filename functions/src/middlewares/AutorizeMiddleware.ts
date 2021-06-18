@@ -18,8 +18,8 @@ export default function AutorizeAuth(
    const secret = config.JWT_KEY as string;
    try {
       const data = jwt.verify(authorization, secret);
-      const { email, uid, nomeCompleto } = data as TokenPayload;
-      req.userId = uid;
+      const { email, id, nomeCompleto } = data as TokenPayload;
+      req.userId = id;
       req.nome = nomeCompleto;
       req.email = email;
       return next();

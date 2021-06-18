@@ -1,5 +1,5 @@
 export interface Documento {
-   uid:string;
+   id?:string;
    nome: string;
    particao: string;
    extensao: string;

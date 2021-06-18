@@ -50,6 +50,7 @@ class SetorRep {
          obj.criadoPor = req.email;
          obj.alteradoPor = req.email;
          obj.ativo = true;
+         obj.id = uid;
          await this.db.collection('setores').doc(uid).set(obj);
          return obj;
       } catch (error) {
@@ -62,9 +63,7 @@ class SetorRep {
          obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          await this.db.collection('setores').doc(uid).update(obj);
-         const setor = ConvertToSetorDto.Convert(obj);
-         setor.id = uid;
-         return setor;
+         return this.get(uid);
       } catch (error) {
          throw error;
       }
@@ -76,9 +75,7 @@ class SetorRep {
          obj.alteradoPor = req.email;
          obj.ativo = false;
          await this.db.collection('setores').doc(uid).update(obj);
-         const setor = ConvertToSetorDto.Convert(obj);
-         setor.id = uid;
-         return setor;
+         return true;
       } catch (error) {
          throw error;
       }

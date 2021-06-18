@@ -8,7 +8,7 @@ class SetoresController {
          const dados = await SetorRep.getAll();
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -18,7 +18,7 @@ class SetoresController {
          const dados = await SetorRep.get(id);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -28,18 +28,18 @@ class SetoresController {
          const dados = await SetorRep.post(obj, req);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
    async put(req: Request, res: Response) {
       try {
          const obj: Setor = req.body;
-         const id = req.body.id;
+         const id = obj.id as string;
          const dados = await SetorRep.put(obj, id, req);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -48,9 +48,12 @@ class SetoresController {
          const obj: Setor = req.body;
          const id = req.body.id;
          const dados = await SetorRep.delete(obj, id, req);
-         return res.json(dados);
+         if (dados == true) {
+            return res.json({ success: true });
+         }
+         return res.json({ success: false });
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 }

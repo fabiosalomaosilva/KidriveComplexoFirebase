@@ -50,8 +50,8 @@ class RequisicaoRep {
          obj.criadoPor = req.email;
          obj.alteradoPor = req.email;
          obj.ativo = true;
+         obj.id = uid;
          await this.db.collection('requisicoes').doc(uid).set(obj);
-         obj.uid = uid;
          return obj;
       } catch (error) {
          throw error;
@@ -63,8 +63,7 @@ class RequisicaoRep {
          obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          await this.db.collection('requisicoes').doc(uid).update(obj);
-         obj.uid = uid;
-         return obj;
+         return this.get(uid);
       } catch (error) {
          throw error;
       }
@@ -76,8 +75,7 @@ class RequisicaoRep {
          obj.alteradoPor = req.email;
          obj.ativo = false;
          await this.db.collection('requisicoes').doc(uid).update(obj);
-         obj.uid = uid;
-         return obj;
+         return true;
       } catch (error) {
          throw error;
       }

@@ -1,7 +1,7 @@
 import { firestore } from 'firebase-admin';
 
 export interface UserRegister {
-   uid?: string;
+   id?: string;
    nomeCompleto: string;
    email: string;
    password: string;

@@ -8,7 +8,7 @@ class AcompanhantesController {
          const dados = await PessoaRep.getAll();
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -18,7 +18,7 @@ class AcompanhantesController {
          const dados = await PessoaRep.get(id);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -29,7 +29,7 @@ class AcompanhantesController {
          const dados = await PessoaRep.post(obj, req);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -40,7 +40,7 @@ class AcompanhantesController {
          const dados = await PessoaRep.put(obj, id, req);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -49,9 +49,12 @@ class AcompanhantesController {
          const obj: Pessoa = req.body;
          const id = req.body.id;
          const dados = await PessoaRep.delete(obj, id, req);
-         return res.json(dados);
+         if (dados == true) {
+            return res.json({ success: true });
+         }
+         return res.json({ success: false });
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 }

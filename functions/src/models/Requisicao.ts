@@ -2,7 +2,7 @@ import { firestore } from 'firebase-admin';
 import { Pessoa } from './Pessoa';
 
 export interface Requisicao {
-   uid?: string;
+   id?: string;
    numero: number;
    contrato: string;
    dataRequisicao: firestore.Timestamp;

@@ -8,7 +8,7 @@ class TermosController {
          const dados = await TermoRep.getAll();
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -18,7 +18,7 @@ class TermosController {
          const dados = await TermoRep.get(id);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -28,7 +28,7 @@ class TermosController {
          const dados = await TermoRep.post(obj, req);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -39,7 +39,7 @@ class TermosController {
          const dados = await TermoRep.put(obj, id, req);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -48,9 +48,12 @@ class TermosController {
          const obj: Termo = req.body;
          const id = req.body.id;
          const dados = await TermoRep.delete(obj, id, req);
-         return res.json(dados);
+         if (dados == true) {
+            return res.json({ success: true });
+         }
+         return res.json({ success: false });
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 }

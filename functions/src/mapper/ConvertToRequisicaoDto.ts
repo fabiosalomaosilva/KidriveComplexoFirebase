@@ -3,7 +3,7 @@ import { Requisicao } from '../models/Requisicao';
 class ConvertToRequisicaoDto {
    Convert(obj: Requisicao) {
       return {
-         id: '',
+         id: obj.id,
          numero: obj.numero,
          contrato: obj.contrato,
          dataRequisicao: obj.dataRequisicao.toDate(),

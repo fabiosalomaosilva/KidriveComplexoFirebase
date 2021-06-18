@@ -1,7 +1,7 @@
 import { firestore } from 'firebase-admin';
 
 export interface User {
-   uid?: string;
+   id?: string;
    nomeCompleto: string;
    email: string;
    cpf: string;

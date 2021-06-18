@@ -8,7 +8,7 @@ class RequisicoesController {
          const dados = await RequisicaoRep.getAll();
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -18,7 +18,7 @@ class RequisicoesController {
          const dados = await RequisicaoRep.get(id);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -28,7 +28,7 @@ class RequisicoesController {
          const dados = await RequisicaoRep.post(obj, req);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -39,7 +39,7 @@ class RequisicoesController {
          const dados = await RequisicaoRep.put(obj, id, req);
          return res.json(dados);
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 
@@ -48,9 +48,12 @@ class RequisicoesController {
          const obj: Requisicao = req.body;
          const id = req.body.id;
          const dados = await RequisicaoRep.delete(obj, id, req);
-         return res.json(dados);
+         if (dados == true) {
+            return res.json({ success: true });
+         }
+         return res.json({ success: false });
       } catch (error) {
-         return res.send(500).send(error);
+         return res.status(500).send(error);
       }
    }
 }

@@ -3,7 +3,7 @@ import { Documento } from './Documento';
 import { Pessoa } from './Pessoa';
 
 export interface Termo {
-   uid?: string;
+   id?: string;
    tipoTermo: TipoTermo;
    numero: string;
    numeroProcesso: string;

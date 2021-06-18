@@ -3,7 +3,7 @@ import { Pessoa } from '../models/Pessoa';
 class ConvertToPessoaDto {
    Convert(obj: Pessoa) {
       return {
-         id: '',
+         id: obj.id,
          nome: obj.nome,
          naturezaPessoa: obj.naturezaPessoa,
          tipoPessoa: obj.tipoPessoa,

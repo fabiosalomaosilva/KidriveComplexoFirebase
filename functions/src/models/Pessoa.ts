@@ -4,7 +4,7 @@ import { TipoEndereco } from './Endereco';
 import { Telefone } from './Telefone';
 
 export interface Pessoa {
-   uid?: string;
+   id?: string;
    naturezaPessoa: NaturezaPessoa;
 
    tipoPessoa: TipoPessoaFisica;

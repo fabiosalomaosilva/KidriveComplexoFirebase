@@ -62,10 +62,10 @@ class AccountRep {
          user.criadoPor = req.nome == undefined ? 'administrador' : req.nome;
          user.alteradoPor = req.nome == undefined ? 'administrador' : req.nome;
          user.ativo = true;
-         user.uid = userResult.user?.uid;
+         user.id = userResult.user?.uid;
          await this.db
             .collection('Users')
-            .doc(user.uid as string)
+            .doc(user.id as string)
             .set(user);
          user.password = '';
          return user as User;

@@ -36,7 +36,7 @@ class TermoRep {
       try {
          const snapshot = await ref.doc(uid).get();
          if (!snapshot.exists) return null;
-         return snapshot.data();
+         return ConvertToTermoDto.Convert(snapshot.data() as Termo);
       } catch (error) {
          throw error;
       }
@@ -55,8 +55,8 @@ class TermoRep {
          obj.alteradoPor = req.email;
          obj.ativo = true;
          obj.fimVigencia = dataFimContrato.toDateString();
+         obj.id = uid;
          await this.db.collection('termos').doc(uid).set(obj);
-         obj.uid = uid;
          return obj;
       } catch (error) {
          throw error;
@@ -68,8 +68,7 @@ class TermoRep {
          obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          await this.db.collection('termos').doc(uid).update(obj);
-         obj.uid = uid;
-         return obj;
+         return this.get(uid);
       } catch (error) {
          throw error;
       }
@@ -81,8 +80,7 @@ class TermoRep {
          obj.alteradoPor = req.nome;
          obj.ativo = false;
          await this.db.collection('termos').doc(uid).update(obj);
-         obj.uid = uid;
-         return obj;
+         return true;
       } catch (error) {
          throw error;
       }

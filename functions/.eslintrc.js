@@ -22,6 +22,7 @@ module.exports = {
    ],
    plugins: ['@typescript-eslint', 'import'],
    rules: {
+      'linebreak-style': ['error', 'unix'],
       'quotes': ['error', 'single'],
       'indent': ['error', 3],
       'object-curly-spacing': ['error', 'always'],
