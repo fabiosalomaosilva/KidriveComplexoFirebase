@@ -1,9 +1,11 @@
+/* eslint-disable new-cap */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import firebase, { firestore } from 'firebase-admin';
 import { Request } from 'express';
 import { Guid } from 'guid-typescript';
 
 import { Pessoa } from '../models/Pessoa';
+import ConvertToPessoaDto from '../mapper/ConvertToPessoaDto';
 
 class PessoaRep {
    db: FirebaseFirestore.Firestore;
@@ -18,7 +20,12 @@ class PessoaRep {
          const snapshot = await ref.where('ativo', '==', true).get();
          if (snapshot.empty) return lista;
          snapshot.forEach((doc: any) => lista.push(doc.data()));
-         return lista;
+         const listaDto: any[] = [];
+         lista.map((i) => {
+            const item = ConvertToPessoaDto.Convert(i);
+            listaDto.push(item);
+         });
+         return listaDto;
       } catch (error) {
          throw error;
       }
@@ -29,7 +36,7 @@ class PessoaRep {
       try {
          const snapshot = await ref.doc(uid).get();
          if (!snapshot.exists) return null;
-         return snapshot.data();
+         return ConvertToPessoaDto.Convert(snapshot.data() as Pessoa);
       } catch (error) {
          throw error;
       }

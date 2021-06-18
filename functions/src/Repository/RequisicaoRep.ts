@@ -1,9 +1,11 @@
+/* eslint-disable new-cap */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import firebase from 'firebase-admin';
 import { Request } from 'express';
 import { Guid } from 'guid-typescript';
 
 import { Requisicao } from '../models/Requisicao';
+import ConvertToRequisicaoDto from '../mapper/ConvertToRequisicaoDto';
 
 class RequisicaoRep {
    db: FirebaseFirestore.Firestore;
@@ -18,7 +20,12 @@ class RequisicaoRep {
          const snapshot = await ref.where('ativo', '==', true).get();
          if (snapshot.empty) return lista;
          snapshot.forEach((doc: any) => lista.push(doc.data()));
-         return lista;
+         const listaDto: any[] = [];
+         lista.map((i) => {
+            const item = ConvertToRequisicaoDto.Convert(i);
+            listaDto.push(item);
+         });
+         return listaDto;
       } catch (error) {
          throw error;
       }
@@ -29,7 +36,7 @@ class RequisicaoRep {
       try {
          const snapshot = await ref.doc(uid).get();
          if (!snapshot.exists) return null;
-         return snapshot.data();
+         return ConvertToRequisicaoDto.Convert(snapshot.data() as Requisicao);
       } catch (error) {
          throw error;
       }

@@ -36,7 +36,7 @@ class SetorRep {
       try {
          const snapshot = await ref.doc(uid).get();
          if (!snapshot.exists) return null;
-         return snapshot.data();
+         return ConvertToSetorDto.Convert(snapshot.data() as Setor);
       } catch (error) {
          throw error;
       }

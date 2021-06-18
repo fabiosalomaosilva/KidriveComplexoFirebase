@@ -1,9 +1,11 @@
+/* eslint-disable new-cap */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import firebase from 'firebase-admin';
 import { Request } from 'express';
 import { Guid } from 'guid-typescript';
 
 import { Termo } from '../models/Termo';
+import ConvertToTermoDto from '../mapper/ConvertToTermoDto';
 
 class TermoRep {
    db: FirebaseFirestore.Firestore;
@@ -18,7 +20,12 @@ class TermoRep {
          const snapshot = await ref.where('ativo', '==', true).get();
          if (snapshot.empty) return lista;
          snapshot.forEach((doc: any) => lista.push(doc.data()));
-         return lista;
+         const listaDto: any[] = [];
+         lista.map((i) => {
+            const item = ConvertToTermoDto.Convert(i);
+            listaDto.push(item);
+         });
+         return listaDto;
       } catch (error) {
          throw error;
       }

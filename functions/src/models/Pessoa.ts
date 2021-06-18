@@ -12,7 +12,7 @@ export interface Pessoa {
    nome: string;
    email: string;
 
-   dataNascimento: string;
+   dataNascimento: firestore.Timestamp;
    identidade: string;
    cpf: string;
    sus: string;

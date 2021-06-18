@@ -5,10 +5,10 @@ export interface Requisicao {
    uid?: string;
    numero: number;
    contrato: string;
-   dataRequisicao: string;
+   dataRequisicao: firestore.Timestamp;
    paciente: Pessoa;
    acompanhante: Pessoa;
-   dataEmbarque: string;
+   dataEmbarque: firestore.Timestamp;
    localOrigem: string;
    localDestino: string;
    descricao: string;
