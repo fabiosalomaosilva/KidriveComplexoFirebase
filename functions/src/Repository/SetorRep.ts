@@ -61,7 +61,7 @@ class SetorRep {
 
    async put(obj: Setor, uid: string, req: Request) {
       try {
-         obj.criadoEm = firebase.firestore.Timestamp.fromDate(req.body.criadoEm);
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(new Date(req.body.criadoEm));
          obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          await this.db.collection('setores').doc(uid).update(obj);
@@ -73,7 +73,7 @@ class SetorRep {
 
    async delete(obj: Setor, uid: string, req: Request) {
       try {
-         obj.criadoEm = firebase.firestore.Timestamp.fromDate(req.body.criadoEm);
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(new Date(req.body.criadoEm));
          obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          obj.ativo = false;
