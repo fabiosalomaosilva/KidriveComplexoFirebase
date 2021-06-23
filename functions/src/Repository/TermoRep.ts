@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable new-cap */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import firebase from 'firebase-admin';
@@ -65,6 +66,7 @@ class TermoRep {
 
    async put(obj: Termo, uid: string, req: Request) {
       try {
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(req.body.criadoEm);
          obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          await this.db.collection('termos').doc(uid).update(obj);
@@ -76,6 +78,7 @@ class TermoRep {
 
    async delete(obj: Termo, uid: string, req: Request) {
       try {
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(req.body.criadoEm);
          obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.nome;
          obj.ativo = false;

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable new-cap */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import firebase, { firestore } from 'firebase-admin';
@@ -60,6 +61,7 @@ class PessoaRep {
 
    async put(obj: Pessoa, uid: string, req: Request) {
       try {
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(req.body.criadoEm);
          obj.alteradoEm = firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          await this.db.collection('pessoas').doc(uid).update(obj);
@@ -71,6 +73,7 @@ class PessoaRep {
 
    async delete(obj: Pessoa, uid: string, req: Request) {
       try {
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(req.body.criadoEm);
          obj.alteradoEm = firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          obj.ativo = false;

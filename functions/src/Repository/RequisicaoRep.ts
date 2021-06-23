@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable new-cap */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import firebase from 'firebase-admin';
@@ -60,6 +61,7 @@ class RequisicaoRep {
 
    async put(obj: Requisicao, uid: string, req: Request) {
       try {
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(req.body.criadoEm);
          obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          await this.db.collection('requisicoes').doc(uid).update(obj);
@@ -71,6 +73,7 @@ class RequisicaoRep {
 
    async delete(obj: Requisicao, uid: string, req: Request) {
       try {
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(req.body.criadoEm);
          obj.alteradoEm = firebase.firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          obj.ativo = false;
