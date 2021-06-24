@@ -61,7 +61,7 @@ class PessoaRep {
 
    async put(obj: Pessoa, uid: string, req: Request) {
       try {
-         obj.criadoEm = firebase.firestore.Timestamp.fromDate(req.body.criadoEm);
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(new Date(req.body.criadoEm));
          obj.alteradoEm = firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          await this.db.collection('pessoas').doc(uid).update(obj);
@@ -73,7 +73,7 @@ class PessoaRep {
 
    async delete(obj: Pessoa, uid: string, req: Request) {
       try {
-         obj.criadoEm = firebase.firestore.Timestamp.fromDate(req.body.criadoEm);
+         obj.criadoEm = firebase.firestore.Timestamp.fromDate(new Date(req.body.criadoEm));
          obj.alteradoEm = firestore.Timestamp.fromDate(new Date());
          obj.alteradoPor = req.email;
          obj.ativo = false;
